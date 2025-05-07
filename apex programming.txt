@@ -1,0 +1,165 @@
+id:- s24781089867@agentforce.com
+pass : Shantanu2003@
+
+
+
+apex program:
+
+------------------------------------------------------------------
+public class calc {
+public Double val1 {get;set;}
+public Double val2 {get;set;}
+public Double result {get;set;}
+public string func {get;set;}
+public calc()
+{
+}
+public void find()
+{
+if(func == 'add')
+{
+result= val1 +val2 ;
+}
+else if (func=='sub')
+{
+result=val1-val2;
+}
+else if (func=='div')
+{
+result=val1/val2;
+}
+else if (func=='multi')
+{
+result=val1*val2;
+}
+else if (func=='lesser')
+{
+    if(val1<val2)
+    {
+        result=val1;
+    }
+    else
+    {
+        result=val2;
+    }
+}
+else if (func=='greater')
+{
+    if(val1>val2)
+    {
+        result=val1;
+    }
+    else
+    {
+        result=val2;
+    }
+}       
+else
+{
+Integer temp =math.mod(Integer.valueOf(val1),Integer.valueOf(val2));
+result = Double.valueOf(temp);
+}
+}
+}
+
+-----------------------------------------------------------
+to run :-
+
+Integer result = demo.add(5, 3);
+System.debug('Result: ' + result);
+----------------------------------------
+
+
+
+for frontend:- make a new file .
+--------------------------------------------------------------------------------------------------
+<apex:page controller="calc">
+    <style>
+        .calculator-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f4f6f9;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator-container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .calculator-container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .calculator-container .radio-group {
+            margin-bottom: 20px;
+        }
+
+        .calculator-container .button {
+            background-color: #0070d2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .calculator-container .button:hover {
+            background-color: #005bb5;
+        }
+
+        .calculator-container .status {
+            margin-left: 10px;
+            font-style: italic;
+            color: gray;
+        }
+    </style>
+
+    <apex:form >
+        <div class="calculator-container">
+            <apex:pageBlock title="Smart Calculator" id="mainBlock">
+                <apex:pageBlockSection columns="1">
+
+                    <apex:outputLabel value="Value 1"/>
+                    <apex:inputText value="{!val1}"/>
+
+                    <apex:outputLabel value="Value 2"/>
+                    <apex:inputText value="{!val2}"/>
+
+                    <apex:outputLabel value="Choose Operation"/>
+                    <div class="radio-group">
+                        <apex:selectRadio value="{!func}" layout="pageDirection">
+                            <apex:selectOption itemValue="add" itemLabel="Add"/>
+                            <apex:selectOption itemValue="sub" itemLabel="Subtract"/>
+                            <apex:selectOption itemValue="div" itemLabel="Division"/>
+                            <apex:selectOption itemValue="mod" itemLabel="Modulo Division"/>
+                            <apex:selectOption itemValue="multi" itemLabel="Multiplication"/>
+                            <apex:selectOption itemValue="greater" itemLabel="Greater"/>
+                            <apex:selectOption itemValue="lesser" itemLabel="Lesser"/>
+                            <apex:selectOption itemValue="even" itemLabel="Even"/>
+                            <apex:selectOption itemValue="odd" itemLabel="Odd"/>      
+                        </apex:selectRadio>
+                    </div>
+
+                    <apex:outputLabel value="Result"/>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!result}" id="res"/>
+                        <apex:actionStatus id="sts" startText="Finding..." />
+                    </apex:outputPanel>
+
+                    <apex:commandButton value="Find" action="{!find}" reRender="res" status="sts" styleClass="button"/>
+
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>
+------------------------------------------------

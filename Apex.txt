@@ -1,0 +1,24 @@
+public class SimpleCalculator1 {
+    public static void main() {
+        Decimal num1 = 10;
+        Decimal num2 = 5;
+        String op = '+';  // Change this to '-', '*', or '/'
+
+        Decimal result;
+
+        if (op == '+') {
+            result = num1 + num2;
+        } else if (op == '-') {
+            result = num1 - num2;
+        } else if (op == '*') {
+            result = num1 * num2;
+        } else if (op == '/') {
+            result = num1 / num2;
+        } else {
+            System.debug('Invalid operation');
+            return;
+        }
+
+        System.debug('Result: ' + result);
+    }
+}
